@@ -1,0 +1,89 @@
+<div class="container py-4">
+  <div class="card shadow mx-auto" style="max-width: 520px;">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <span class="d-flex align-items-center gap-2">
+        <span style="font-size: 1.25rem;">🍅</span>
+        <span>番茄鐘 Time</span>
+      </span>
+
+      <div class="d-flex align-items-center gap-2">
+        <!-- 啟用通知 -->
+        <button class="btn btn-sm btn-outline-primary"
+                (click)="requestNotificationPermission()">
+          啟用通知
+        </button>
+
+        <!-- 開關：是否要通知（偏好） -->
+        <div class="form-check form-switch m-0">
+          <input class="form-check-input" type="checkbox" id="notifyOn"
+                 [checked]="notifyOn()"
+                 (change)="onNotifyToggle($event)">
+          <label class="form-check-label" for="notifyOn">通知</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-body text-center">
+      <div class="mb-2">
+        <span class="badge"
+              [class.text-bg-success]="isWork()"
+              [class.text-bg-primary]="!isWork()">
+          {{ isWork() ? '專注中' : '休息中' }}
+        </span>
+        <small class="text-muted ms-2">
+          通知權限：{{ notifPermission() }}
+        </small>
+      </div>
+
+      <div class="display-4 mb-2" style="font-variant-numeric: tabular-nums;">
+        {{ minutes() }}:{{ seconds() }}
+      </div>
+
+      <!-- 進度描述 + 百分比 -->
+<div class="d-flex justify-content-between align-items-end mb-1">
+  <small class="text-muted">進度</small>
+  <small class="text-muted">{{ percent() }}%</small>
+</div>
+
+<!-- 包貓咪與進度條 -->
+<div class="progress-wrap position-relative mb-3">
+  <!-- 貓咪動畫 -->
+  <div class="cat" [class.paused]="!running()" [style.left.%]="progress()">🐱</div>
+
+  <div class="progress" role="progressbar" aria-label="progress">
+    <div class="progress-bar" [style.width.%]="progress()"></div>
+  </div>
+</div>
+
+      <div class="d-flex justify-content-center gap-2 mb-3">
+        <button class="btn btn-primary" (click)="start()" [disabled]="running()">開始</button>
+        <button class="btn btn-warning" (click)="pause()" [disabled]="!running()">暫停</button>
+        <button class="btn btn-outline-secondary" (click)="reset()">重置</button>
+      </div>
+
+      <div class="row g-2 text-start">
+        <div class="col-6">
+          <label class="form-label">專注(分)</label>
+          <input class="form-control" type="number" min="1"
+                 [value]="workMinutes()"
+                 (input)="updateWork($event)" />
+        </div>
+        <div class="col-6">
+          <label class="form-label">休息(分)</label>
+          <input class="form-control" type="number" min="1"
+                 [value]="breakMinutes()"
+                 (input)="updateBreak($event)" />
+        </div>
+      </div>
+    </div>
+
+    <div class="card-footer d-flex justify-content-between align-items-center">
+      <div class="text-muted">
+        已完成番茄：<b>{{ completed() }}</b>
+      </div>
+      <button class="btn btn-sm btn-outline-danger" (click)="resetSettingsToDefaults()">
+        還原預設（25 / 5）
+      </button>
+    </div>
+  </div>
+</div>

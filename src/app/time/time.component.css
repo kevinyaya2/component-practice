@@ -1,0 +1,28 @@
+:host { display: block; }
+.card { border-radius: 1rem; }
+.display-4 { font-weight: 600; }
+/* 讓進度列成為絕對定位的參考點 */
+.progress-wrap { height: 28px; }
+
+/* 貓放在進度列上方，水平以 left% 對齊；translateX(-50%) 讓貓以身體中心對齊 */
+.cat {
+  position: absolute;
+  top: -26px;                 /* 跑在進度列上方 */
+  transform: translateX(-50%);
+  font-size: 24px;            /* 貓咪大小 */
+  user-select: none;
+  animation: cat-bob 0.6s ease-in-out infinite;
+}
+
+/* 暫停時讓動畫停止並稍微變淡 */
+.cat.paused {
+  animation-play-state: paused;
+  opacity: 0.6;
+}
+
+/* 跑步的「上下跳」感 */
+@keyframes cat-bob {
+  0%   { transform: translateX(-50%) translateY(0);   }
+  50%  { transform: translateX(-50%) translateY(-6px);}
+  100% { transform: translateX(-50%) translateY(0);   }
+}
