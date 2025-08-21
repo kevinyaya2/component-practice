@@ -1,13 +1,46 @@
-<header class="container py-3">
-  <h1 class="h3 mb-2">🎯 Angular Component 練習專案</h1>
-  <nav class="mb-3">
-    <a routerLink="/counter" routerLinkActive="active" class="me-3">計數器</a>
-    <a routerLink="/user-card" routerLinkActive="active" class="me-3">使用者卡片</a>
-    <a routerLink="/time" routerLinkActive="active">番茄鐘</a>
-  </nav>
-  <hr />
-</header>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+  <div class="container">
+    <a class="navbar-brand fw-bold text-white" routerLink="/">🎯 練習專案</a>
 
+    <button
+      class="navbar-toggler border-0"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#mainNavbar"
+      aria-controls="mainNavbar"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="mainNavbar">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link fw-semibold text-white" routerLink="/counter" routerLinkActive="active">計數器</a></li>
+        <li class="nav-item"><a class="nav-link fw-semibold text-white" routerLink="/user-card" routerLinkActive="active">使用者卡片</a></li>
+        <li class="nav-item"><a class="nav-link fw-semibold text-white" routerLink="/time" routerLinkActive="active">番茄鐘</a></li>
+        <li class="nav-item"><a class="nav-link fw-semibold text-white" routerLink="/weather" routerLinkActive="active">天氣小卡片</a></li>
+        <li class="nav-item"><a class="nav-link fw-semibold text-white" routerLink="/invest" routerLinkActive="active">ETF 模擬器</a></li>
+        <li class="nav-item"><a class="nav-link fw-semibold text-white" routerLink="/todo" routerLinkActive="active">代辦清單</a></li>
+      </ul>
+
+      <!-- 右側（可放外部連結或狀態） -->
+      <div class="d-flex">
+        <!-- 範例：GitHub 連結 -->
+        <a
+          class="btn btn-outline-light btn-sm"
+          href="https://github.com/"
+          target="_blank"
+          rel="noopener"
+          >GitHub</a
+        >
+      </div>
+    </div>
+  </div>
+</nav>
+
+
+<!-- 主要內容 -->
 <main class="container py-3">
   <router-outlet></router-outlet>
 </main>

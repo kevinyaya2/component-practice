@@ -1,0 +1,118 @@
+:host {
+  display: grid;
+  place-items: center;
+  min-height: 50vh;
+}
+
+/* 卡片基礎 */
+.card {
+  width: min(92vw, 320px);
+  border-radius: 18px;
+  padding: 16px 16px 12px;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 18px 40px rgba(0,0,0,.25);
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 10px;
+}
+
+/* 背景主題 */
+.theme--sunny  { background: linear-gradient(135deg,#FFB457,#FF7A00); }
+.theme--cloudy { background: linear-gradient(135deg,#8EA6C9,#5B77A3); }
+.theme--fog    { background: linear-gradient(135deg,#B8C0C7,#8A939B); }
+.theme--rain   { background: linear-gradient(135deg,#5B86E5,#36D1DC); }
+.theme--snow   { background: linear-gradient(135deg,#B3E5FC,#81D4FA); color:#0d1b2a; }
+.theme--storm  { background: linear-gradient(135deg,#4B79A1,#283E51); }
+.theme--default{ background: linear-gradient(135deg,#7F7FD5,#86A8E7); }
+
+.card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+/* ----- 美化 select（維持原生、相容性高） ----- */
+.select-wrap {
+  position: relative;
+  display: inline-grid;
+}
+.city-select {
+  appearance: none;        /* 移除原生箭頭 */
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  padding: 8px 28px 8px 12px;
+  border-radius: 10px;
+  border: none;
+  background: rgba(255,255,255,.18);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  outline: none;
+  backdrop-filter: blur(4px);
+  cursor: pointer;
+  text-shadow: 0 1px 0 rgba(0,0,0,.15);
+}
+.city-select:focus {
+  box-shadow: 0 0 0 2px rgba(255,255,255,.35) inset;
+}
+.city-select option {
+  background: #3b82f6; /* 展開清單的底色（不同瀏覽器呈現略有差異） */
+  color: #fff;
+  font-weight: 500;
+}
+.select-arrow {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-52%);
+  pointer-events: none;
+  font-size: 12px;
+  opacity: .9;
+}
+
+/* 溫標按鈕 */
+.unit-btn {
+  border: none;
+  border-radius: 10px;
+  padding: 8px 10px;
+  background: rgba(255,255,255,.18);
+  color: #fff;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform .15s ease;
+}
+.unit-btn:active { transform: scale(.96); }
+
+.card__body {
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  padding: 4px 0 2px;
+}
+.icon { font-size: 48px; line-height: 1; filter: drop-shadow(0 4px 10px rgba(0,0,0,.18)); }
+.temp { font-size: 56px; font-weight: 900; letter-spacing: .5px; }
+.desc { display: flex; gap: 10px; opacity: .95; font-weight: 600; }
+.loading, .error { text-align: center; padding: 28px 0; font-weight: 600; }
+
+.card__footer {
+  display: flex; align-items: center; gap: 8px;
+  opacity: .9; font-weight: 500;
+}
+.dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: rgba(255,255,255,.95);
+  box-shadow: 0 0 0 6px rgba(255,255,255,.15);
+}
+
+/* 小動畫 */
+@keyframes popIn { from { transform: translateY(8px); opacity: 0; } to { transform:none; opacity:1; } }
+.temp[data-anim] { animation: popIn .22s ease-out; }
+
+/* RWD 微調 */
+@media (max-width: 360px) {
+  .temp { font-size: 48px; }
+  .icon { font-size: 42px; }
+}

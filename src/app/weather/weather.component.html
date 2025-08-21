@@ -1,0 +1,45 @@
+<div class="card" [class]="'card theme--' + status().theme">
+
+  <header class="card__header">
+    <!-- 美化版原生 select（不用 ngModel） -->
+    <div class="select-wrap">
+      <select
+        class="city-select"
+        [value]="selectedCity().name"
+        #citySel
+        (change)="changeCity(citySel.value)"
+        aria-label="選擇城市"
+      >
+        <option *ngFor="let c of cities" [value]="c.name">{{ c.name }}</option>
+      </select>
+      <span class="select-arrow" aria-hidden="true">▾</span>
+    </div>
+
+    <button class="unit-btn" type="button" (click)="toggleUnit()" aria-label="切換溫標">
+      {{ unit() === 'C' ? '°C' : '°F' }}
+    </button>
+  </header>
+
+  <main class="card__body" *ngIf="!loading(); else loadingTpl">
+    <ng-container *ngIf="!error(); else errorTpl">
+      <div class="icon">{{ status().icon }}</div>
+      <div class="temp" *ngIf="temp() !== null" data-anim>{{ temp() }}°</div>
+      <div class="desc">
+        <span class="label">{{ status().label }}</span>
+        <span class="feel" *ngIf="feel() !== null">體感 {{ feel() }}°</span>
+      </div>
+    </ng-container>
+  </main>
+
+  <footer class="card__footer" *ngIf="updatedAt() as t">
+    <span class="dot"></span>
+    <small>更新：{{ t | date:'HH:mm:ss' }}</small>
+  </footer>
+
+  <ng-template #loadingTpl>
+    <div class="loading">載入中…</div>
+  </ng-template>
+  <ng-template #errorTpl>
+    <div class="error">{{ error() }}</div>
+  </ng-template>
+</div>

@@ -1,0 +1,133 @@
+/* 整體 */
+.todo-wrap {
+  max-width: 720px;
+  margin: 2rem auto;
+  font-family: "Segoe UI", "Noto Sans TC", sans-serif;
+}
+
+/* 卡片 */
+.card {
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 6px 18px rgba(0, 128, 128, 0.15);
+  border: none;
+}
+
+/* 標題 */
+h2.h5 {
+  font-weight: bold;
+  color: #0077b6;
+}
+.icon-title {
+  font-size: 1.25rem;
+  line-height: 1;
+  color: #00b4d8;
+}
+
+/* badge: 自訂 class */
+.badge-secondary-custom {
+  background-color: #00b4d8;
+  color: #fff;
+}
+.badge-success-custom {
+  background-color: #ffb703;
+  color: #fff;
+}
+
+/* 輸入列 */
+.input-group-text {
+  background-color: #e0f7fa;
+  border: none;
+  color: #0077b6;
+  font-weight: 600;
+}
+.form-control {
+  border-radius: 12px;
+  border: 2px solid #90e0ef;
+}
+.form-control:focus {
+  border-color: #0077b6;
+  box-shadow: 0 0 0 0.2rem rgba(0, 119, 182, 0.2);
+}
+
+/* 按鈕 */
+.btn {
+  border-radius: 12px;
+  font-weight: 600;
+  transition: transform 0.15s ease, background-color 0.2s ease;
+}
+.btn:hover {
+  transform: translateY(-2px);
+}
+.btn-primary {
+  background-color: #00b4d8;
+  border: none;
+  color: #fff;
+}
+.btn-primary:hover {
+  background-color: #0077b6;
+}
+.btn-outline-secondary {
+  border: 2px solid #90e0ef;
+  color: #0077b6;
+}
+.btn-outline-secondary:hover {
+  background-color: #90e0ef;
+  color: white;
+}
+.btn-outline-danger {
+  border: 2px solid #f08080;
+  color: #f08080;
+}
+.btn-outline-danger:hover {
+  background-color: #f08080;
+  color: white;
+}
+
+/* 清單 */
+.list-group-item {
+  border: none;
+  background: #f9f9f9;
+  margin-bottom: 0.5rem;
+  border-radius: 12px;
+  padding: 0.75rem 1rem;
+  box-shadow: 0 3px 6px rgba(0, 128, 128, 0.08);
+  transition: background 0.2s;
+}
+.list-group-item:hover {
+  background: #e6f7ff;
+}
+
+/* 完成狀態 */
+.task.done .title {
+  color: #94a3b8;
+  text-decoration: line-through solid #00b4d8;
+}
+
+/* checkbox */
+.form-check-input {
+  border: 2px solid #00b4d8;
+  width: 1.1rem;
+  height: 1.1rem;
+  margin-top: 0;
+  cursor: pointer;
+}
+.form-check-input:checked {
+  background-color: #00b4d8;
+  border-color: #0077b6;
+}
+
+/* 空狀態 */
+.text-muted {
+  color: #666;
+  font-style: italic;
+}
+
+/* 動畫 */
+@keyframes pop {
+  0% { transform: scale(0.9); opacity: 0.5; }
+  100% { transform: scale(1); opacity: 1; }
+}
+.list-group-item {
+  animation: pop 0.2s ease;
+}

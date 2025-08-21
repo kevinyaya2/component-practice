@@ -1,0 +1,111 @@
+<div class="todo-wrap">
+  <div class="card shadow-sm border-0">
+    <div class="card-body p-3 p-md-4">
+      <!-- 標題 -->
+      <div class="d-flex gap-2 flex-wrap align-items-center mb-3">
+        <h2 class="h5 m-0 d-flex align-items-center">
+          <i class="bi bi-check2-circle icon-title me-2"></i>
+          待辦清單
+        </h2>
+        <span class="badge badge-secondary-custom">{{ leftCount() }} 未完成</span>
+        <span *ngIf="completedCount()" class="badge badge-success-custom">{{ completedCount() }} 已完成</span>
+      </div>
+
+      <!-- 輸入列 -->
+      <div class="row g-2 align-items-center mb-3">
+        <div class="col-12 col-md">
+          <div class="input-group">
+            <span class="input-group-text">新增</span>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="輸入任務，按 Enter 新增"
+              [ngModel]="newTitle()"
+              (ngModelChange)="newTitle.set($event)"
+              (keyup.enter)="add()">
+            <button class="btn btn-primary" (click)="add()">加入</button>
+          </div>
+          <div class="form-text">快捷鍵：Enter 新增、雙擊任務可編輯、Esc 取消編輯。</div>
+        </div>
+
+        <div class="col-12 col-md-auto">
+          <div class="input-group">
+            <span class="input-group-text">搜尋</span>
+            <input
+              type="search"
+              class="form-control"
+              placeholder="關鍵字過濾"
+              [ngModel]="keyword()"
+              (ngModelChange)="keyword.set($event)">
+          </div>
+        </div>
+      </div>
+
+      <!-- 工具列 -->
+      <div class="d-flex flex-wrap gap-2 align-items-center mb-3">
+        <div class="btn-group" role="group" aria-label="Filter">
+          <input class="btn-check" type="radio" id="fAll" name="filter" [checked]="filter()==='all'" (change)="filter.set('all')">
+          <label class="btn btn-outline-secondary btn-sm" for="fAll">全部</label>
+
+          <input class="btn-check" type="radio" id="fActive" name="filter" [checked]="filter()==='active'" (change)="filter.set('active')">
+          <label class="btn btn-outline-secondary btn-sm" for="fActive">未完成</label>
+
+          <input class="btn-check" type="radio" id="fDone" name="filter" [checked]="filter()==='done'" (change)="filter.set('done')">
+          <label class="btn btn-outline-secondary btn-sm" for="fDone">已完成</label>
+        </div>
+
+        <button class="btn btn-outline-secondary btn-sm" (click)="toggleAll()">
+          {{ allChecked() ? '全部標為未完成' : '全部標為完成' }}
+        </button>
+
+        <button class="btn btn-outline-danger btn-sm" (click)="clearCompleted()" [disabled]="!completedCount()">
+          清除已完成
+        </button>
+      </div>
+
+      <!-- 清單 -->
+      <ul class="list-group list-group-flush">
+        <li
+          class="list-group-item d-flex justify-content-between align-items-center task"
+          *ngFor="let t of filtered(); trackBy: trackById"
+          [class.done]="t.done">
+          <div class="d-flex align-items-center gap-2 flex-grow-1">
+            <input type="checkbox" class="form-check-input mt-0" [checked]="t.done" (change)="toggle(t.id)">
+
+            <!-- 顯示模式 -->
+            <div class="title flex-grow-1" *ngIf="editingId() !== t.id" (dblclick)="startEdit(t.id)">
+              {{ t.title }}
+              <small class="text-muted ms-2">{{ t.createdAt | date:'yyyy/MM/dd HH:mm' }}</small>
+            </div>
+
+            <!-- 編輯模式 -->
+            <div class="flex-grow-1" *ngIf="editingId() === t.id">
+              <input
+                type="text"
+                class="form-control form-control-sm"
+                [ngModel]="newTitle()"
+                (ngModelChange)="newTitle.set($event)"
+                (keyup.enter)="confirmEdit(t.id)"
+                (keyup.escape)="cancelEdit()"
+                autofocus>
+              <div class="mt-1 d-flex gap-2">
+                <button class="btn btn-primary btn-sm" (click)="confirmEdit(t.id)">儲存</button>
+                <button class="btn btn-outline-secondary btn-sm" (click)="cancelEdit()">取消</button>
+              </div>
+            </div>
+          </div>
+
+          <button class="btn btn-outline-danger btn-sm" (click)="remove(t.id)">刪除</button>
+        </li>
+      </ul>
+
+      <!-- 空狀態 -->
+      <div class="text-center text-muted py-4" *ngIf="!filtered().length && !todos().length">
+        還沒有任務，先新增一個吧！
+      </div>
+      <div class="text-center text-muted py-4" *ngIf="!filtered().length && todos().length">
+        沒有符合搜尋或篩選條件的任務
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+.card { border-radius: 12px; }
+.kpi {
+  background: #f8fafc;
+  border: 1px solid #eef2f7;
+  border-radius: 12px;
+  padding: 12px 14px;
+  height: 100%;
+}
+.kpi .k { font-size: 12px; color: #64748b; }
+.kpi .v { font-weight: 600; font-size: 20px; letter-spacing: .2px; }
+.font-monospace { font-variant-numeric: tabular-nums; }
