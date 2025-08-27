@@ -1,8 +1,12 @@
 <div class="container py-3">
   <div class="card shadow-sm mb-3">
     <div class="card-body">
-      <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-2">
-        <h2 class="h5 m-0">0050 定期定額模擬器</h2>
+      <div
+        class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-2"
+      >
+        <h2 class="h5 m-0 d-flex align-items-center">
+          <i class="bi bi-graph-up-arrow icon-title me-2"></i>
+          定期定額模擬器</h2>
         <button class="btn btn-primary btn-sm" (click)="run()">開始模擬</button>
       </div>
 
@@ -18,20 +22,40 @@
         </div>
         <div class="col-6 col-md-2">
           <label class="form-label">起始價</label>
-          <input type="number" class="form-control" [(ngModel)]="startPrice" step="0.1" />
+          <input
+            type="number"
+            class="form-control"
+            [(ngModel)]="startPrice"
+            step="0.1"
+          />
         </div>
         <div class="col-6 col-md-2">
           <label class="form-label">標的年化漲幅 %</label>
-          <input type="number" class="form-control" [(ngModel)]="cagrPct" step="0.1" />
+          <input
+            type="number"
+            class="form-control"
+            [(ngModel)]="cagrPct"
+            step="0.1"
+          />
         </div>
         <div class="col-6 col-md-2">
           <label class="form-label">年化殖利率 %</label>
-          <input type="number" class="form-control" [(ngModel)]="divYieldPct" step="0.1" />
+          <input
+            type="number"
+            class="form-control"
+            [(ngModel)]="divYieldPct"
+            step="0.1"
+          />
         </div>
 
         <div class="col-6 col-md-2">
           <label class="form-label">買進手續費率 %</label>
-          <input type="number" class="form-control" [(ngModel)]="feeRatePct" step="0.0001" />
+          <input
+            type="number"
+            class="form-control"
+            [(ngModel)]="feeRatePct"
+            step="0.0001"
+          />
         </div>
         <div class="col-6 col-md-2">
           <label class="form-label">最低手續費</label>
@@ -39,11 +63,21 @@
         </div>
         <div class="col-6 col-md-4 d-flex align-items-center gap-3 pt-2">
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" [(ngModel)]="allowFraction" id="allowFraction">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              [(ngModel)]="allowFraction"
+              id="allowFraction"
+            />
             <label class="form-check-label" for="allowFraction">允許零股</label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" [(ngModel)]="reinvestDiv" id="reinvestDiv">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              [(ngModel)]="reinvestDiv"
+              id="reinvestDiv"
+            />
             <label class="form-check-label" for="reinvestDiv">股利再投入</label>
           </div>
         </div>
@@ -56,39 +90,50 @@
     <div class="col-12 col-md-4">
       <div class="kpi">
         <div class="k">投入總額</div>
-        <div class="v">NT$ {{ invested | number:'1.0-0' }}</div>
+        <div class="v">NT$ {{ invested | number : "1.0-0" }}</div>
       </div>
     </div>
     <div class="col-12 col-md-4">
       <div class="kpi">
         <div class="k">期末資產</div>
-        <div class="v">NT$ {{ finalValue | number:'1.0-0' }}</div>
+        <div class="v">NT$ {{ finalValue | number : "1.0-0" }}</div>
       </div>
     </div>
     <div class="col-12 col-md-4">
       <div class="kpi">
         <div class="k">報酬金額 / 報酬率</div>
-        <div class="v" [class.text-success]="pnl>=0" [class.text-danger]="pnl<0">
-          {{ pnl>=0?'+':'' }}NT$ {{ pnl | number:'1.0-0' }}（{{ (pnlRate*100) | number:'1.2-2' }}%）
+        <div
+          class="v"
+          [class.text-success]="pnl >= 0"
+          [class.text-danger]="pnl < 0"
+        >
+          {{ pnl >= 0 ? "+" : "" }}NT$ {{ pnl | number : "1.0-0" }}（{{
+            pnlRate * 100 | number : "1.2-2"
+          }}%）
         </div>
       </div>
     </div>
     <div class="col-12 col-md-4">
       <div class="kpi">
         <div class="k">平均成本 / 累積持股</div>
-        <div class="v">{{ avgCost | number:'1.2-2' }} 元 / {{ totalShares | number:'1.4-4' }} 股</div>
+        <div class="v">
+          {{ avgCost | number : "1.2-2" }} 元 /
+          {{ totalShares | number : "1.4-4" }} 股
+        </div>
       </div>
     </div>
     <div class="col-12 col-md-4">
       <div class="kpi">
         <div class="k">年化報酬率（IRR）</div>
-        <div class="v">{{ irr===null ? '—' : (irr*100 | number:'1.2-2') + '%' }}</div>
+        <div class="v">
+          {{ irr === null ? "—" : (irr * 100 | number : "1.2-2") + "%" }}
+        </div>
       </div>
     </div>
     <div class="col-12 col-md-4">
       <div class="kpi">
         <div class="k">最大回撤</div>
-        <div class="v">{{ maxDD*100 | number:'1.2-2' }}%</div>
+        <div class="v">{{ maxDD * 100 | number : "1.2-2" }}%</div>
       </div>
     </div>
   </div>
@@ -100,7 +145,12 @@
         <h3 class="h6 m-0">資產曲線</h3>
         <small class="text-muted">單位：月</small>
       </div>
-      <canvas baseChart [type]="chartType" [data]="chartData" [options]="chartOptions"></canvas>
+      <canvas
+        baseChart
+        [type]="chartType"
+        [data]="chartData"
+        [options]="chartOptions"
+      ></canvas>
     </div>
   </div>
 
@@ -110,25 +160,32 @@
       <div class="table-responsive">
         <table class="table table-sm table-hover align-middle m-0">
           <thead class="table-light position-sticky top-0">
-          <tr>
-            <th>日期</th><th class="text-end">收盤</th><th class="text-end">投入</th><th class="text-end">手續費</th>
-            <th class="text-end">買股</th><th class="text-end">累積股數</th><th class="text-end">股利</th>
-            <th class="text-end">市值</th><th class="text-end">現金</th><th class="text-end">資產</th>
-          </tr>
+            <tr>
+              <th>日期</th>
+              <th class="text-end">收盤</th>
+              <th class="text-end">投入</th>
+              <th class="text-end">手續費</th>
+              <th class="text-end">買股</th>
+              <th class="text-end">累積股數</th>
+              <th class="text-end">股利</th>
+              <th class="text-end">市值</th>
+              <th class="text-end">現金</th>
+              <th class="text-end">資產</th>
+            </tr>
           </thead>
           <tbody class="font-monospace">
-          <tr *ngFor="let r of rows">
-            <td>{{ r.ym }}</td>
-            <td class="text-end">{{ r.close | number:'1.2-2' }}</td>
-            <td class="text-end">{{ r.contribution | number:'1.0-0' }}</td>
-            <td class="text-end">{{ r.fee | number:'1.2-2' }}</td>
-            <td class="text-end">{{ r.buyShares | number:'1.4-4' }}</td>
-            <td class="text-end">{{ r.totalShares | number:'1.4-4' }}</td>
-            <td class="text-end">{{ r.dividend | number:'1.2-2' }}</td>
-            <td class="text-end">{{ r.holdingValue | number:'1.0-0' }}</td>
-            <td class="text-end">{{ r.cash | number:'1.0-0' }}</td>
-            <td class="text-end">{{ r.totalValue | number:'1.0-0' }}</td>
-          </tr>
+            <tr *ngFor="let r of rows">
+              <td>{{ r.ym }}</td>
+              <td class="text-end">{{ r.close | number : "1.2-2" }}</td>
+              <td class="text-end">{{ r.contribution | number : "1.0-0" }}</td>
+              <td class="text-end">{{ r.fee | number : "1.2-2" }}</td>
+              <td class="text-end">{{ r.buyShares | number : "1.4-4" }}</td>
+              <td class="text-end">{{ r.totalShares | number : "1.4-4" }}</td>
+              <td class="text-end">{{ r.dividend | number : "1.2-2" }}</td>
+              <td class="text-end">{{ r.holdingValue | number : "1.0-0" }}</td>
+              <td class="text-end">{{ r.cash | number : "1.0-0" }}</td>
+              <td class="text-end">{{ r.totalValue | number : "1.0-0" }}</td>
+            </tr>
           </tbody>
         </table>
       </div>

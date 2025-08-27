@@ -61,10 +61,10 @@ import { CommonModule } from '@angular/common';
 })
 export class UserCardComponent {
   @Input() user = {
-    name: 'Kevin',
-    com: 'New Cooler',
+    name: 'Kevin Liao',
+    com: 'NEO COOLER',
     job: 'Front-End Engineer',
-    phone: '(04) 1234-5678',
+    phone: '(04) 2327-1317#505',
     email: 'kevin.liao@techmore.com.tw'
   };
 }

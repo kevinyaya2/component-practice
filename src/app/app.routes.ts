@@ -5,6 +5,7 @@ import { TimeComponent } from './time/time.component';
 import { WeatherComponent } from './weather/weather.component';
 import { InvestComponent } from './invest/invest.component';
 import { TodoComponent } from './todo/todo.component';
+import { FormQuestionnaireComponent } from './form-questionnaire/form-questionnaire.component';
 
 
 export const routes: Routes = [
@@ -14,5 +15,6 @@ export const routes: Routes = [
   { path: 'weather', component: WeatherComponent },
   { path: 'invest', component: InvestComponent },
   { path: 'todo', component: TodoComponent },
+  { path: 'questionnaire', component: FormQuestionnaireComponent },
   { path: '', redirectTo: 'counter', pathMatch: 'full' },
 ];

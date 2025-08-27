@@ -1,11 +1,126 @@
-.card { border-radius: 12px; }
-.kpi {
-  background: #f8fafc;
-  border: 1px solid #eef2f7;
-  border-radius: 12px;
-  padding: 12px 14px;
-  height: 100%;
+/* 版面與字型：與 Todo 同步 */
+.invest-wrap {
+  max-width: 960px;
+  margin: 2rem auto;
+  font-family: "Segoe UI", "Noto Sans TC", sans-serif;
 }
-.kpi .k { font-size: 12px; color: #64748b; }
-.kpi .v { font-weight: 600; font-size: 20px; letter-spacing: .2px; }
-.font-monospace { font-variant-numeric: tabular-nums; }
+
+/* 卡片（與 Todo 的 .card 一致） */
+.card {
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 6px 18px rgba(0, 128, 128, 0.15);
+  border: none;
+}
+
+/* 標題（可配 Bootstrap Icons） */
+h2.h5, h2.h4, h3.h6 {
+  font-weight: 700;
+  color: #0077b6;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+.icon-title {
+  font-size: 1.25rem;
+  line-height: 1;
+  color: #00b4d8;
+}
+
+/* 表單列：輸入框、群組、提示 */
+.input-group-text {
+  background-color: #e0f7fa;
+  border: none;
+  color: #0077b6;
+  font-weight: 600;
+}
+.form-control, .form-select {
+  border-radius: 12px;
+  border: 2px solid #90e0ef;
+}
+.form-control:focus, .form-select:focus {
+  border-color: #0077b6;
+  box-shadow: 0 0 0 .2rem rgba(0,119,182,.2);
+}
+
+/* 按鈕（沿用 Todo 樣式） */
+.btn {
+  border-radius: 12px;
+  font-weight: 600;
+  transition: transform .15s ease, background-color .2s ease;
+}
+.btn:hover { transform: translateY(-2px); }
+.btn-primary {
+  background-color: #00b4d8; border: none; color: #fff;
+}
+.btn-primary:hover { background-color: #0077b6; }
+.btn-outline-secondary {
+  border: 2px solid #90e0ef; color: #0077b6;
+}
+.btn-outline-secondary:hover { background: #90e0ef; color: #fff; }
+.btn-outline-danger {
+  border: 2px solid #f08080; color: #f08080;
+}
+.btn-outline-danger:hover { background: #f08080; color: #fff; }
+
+/* KPI 區塊（與 Todo 風格一致） */
+.kpi {
+  border-radius: 14px;
+  background: #f9f9f9;
+  padding: .9rem 1rem;
+  box-shadow: 0 3px 6px rgba(0,128,128,.08);
+  display: grid;
+  gap: .25rem;
+}
+.kpi .k { color: #4b5563; font-size: .9rem; }
+.kpi .v { font-weight: 700; font-size: 1.05rem; color: #0f172a; }
+.kpi .v.text-success { color: #15803d; }
+.kpi .v.text-danger  { color: #b91c1c; }
+
+/* 圖表容器 */
+.chart-card {
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 6px 18px rgba(0, 128, 128, 0.12);
+  border: none;
+}
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+/* 表格（回測明細） */
+.table {
+  --bs-table-bg: transparent;
+  --bs-table-hover-bg: #e6f7ff;
+  border-collapse: separate;
+  border-spacing: 0 8px;
+}
+.table thead th {
+  color: #0f172a;
+  font-weight: 700;
+  border: 0;
+}
+.table tbody tr {
+  background: #f9f9f9;
+  box-shadow: 0 3px 6px rgba(0,128,128,.08);
+}
+.table tbody td, .table thead th {
+  border: 0;
+  padding: .75rem .75rem;
+}
+.table tbody tr:hover { background: #e6f7ff; }
+
+/* Badge（可複用 Todo 自訂 class） */
+.badge-secondary-custom { background: #00b4d8; color: #fff; }
+.badge-success-custom   { background: #ffb703; color: #fff; }
+
+/* 區塊間距 */
+.section + .section { margin-top: 1rem; }
+
+/* 輕微進場動畫 */
+@keyframes fadeUp {
+  0% { transform: translateY(6px); opacity: .6; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+.card, .kpi, .table, .chart-card { animation: fadeUp .2s ease; }

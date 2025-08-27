@@ -1,0 +1,86 @@
+<div class="form-container">
+  <h2>📝 健康問卷表單</h2>
+
+  <!-- ✅ 成功訊息 -->
+  <div *ngIf="successMessage" class="success-msg">
+    {{ successMessage }}
+  </div>
+
+  <!-- ❌ 錯誤訊息 -->
+  <div *ngIf="errorMessage" class="error-msg">
+    {{ errorMessage }}
+  </div>
+
+  <!-- 表單 -->
+  <form [formGroup]="questionnaireForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label>姓名</label>
+      <input type="text" formControlName="name" placeholder="請輸入姓名" />
+      <small *ngIf="questionnaireForm.get('name')?.hasError('required') && questionnaireForm.get('name')?.touched"
+             class="error-text">姓名為必填</small>
+    </div>
+
+    <div class="form-group">
+      <label>年齡</label>
+      <input type="number" formControlName="age" placeholder="請輸入年齡" />
+      <small *ngIf="questionnaireForm.get('age')?.hasError('required') && questionnaireForm.get('age')?.touched"
+             class="error-text">年齡為必填</small>
+    </div>
+
+    <div class="form-group">
+      <label>Email</label>
+      <input type="email" formControlName="email" placeholder="請輸入 Email" />
+      <small *ngIf="questionnaireForm.get('email')?.hasError('required') && questionnaireForm.get('email')?.touched"
+             class="error-text">Email 為必填</small>
+      <small *ngIf="questionnaireForm.get('email')?.hasError('email') && questionnaireForm.get('email')?.touched"
+             class="error-text">Email 格式錯誤</small>
+    </div>
+
+    <div class="form-group">
+      <label>每天運動多久？</label>
+      <input type="text" formControlName="exercise" placeholder="例如：30 分鐘" />
+      <small *ngIf="questionnaireForm.get('exercise')?.hasError('required') && questionnaireForm.get('exercise')?.touched"
+             class="error-text">此欄位為必填</small>
+    </div>
+
+    <div class="form-group">
+      <label>每週幾天喝手搖？</label>
+      <input type="text" formControlName="sugarDrink" placeholder="例如：2 天" />
+      <small *ngIf="questionnaireForm.get('sugarDrink')?.hasError('required') && questionnaireForm.get('sugarDrink')?.touched"
+             class="error-text">此欄位為必填</small>
+    </div>
+
+    <div class="form-group">
+      <label>是否抽菸？</label>
+      <select formControlName="smoking" required>
+        <option value="" disabled selected hidden>請選擇是否抽菸</option>
+        <option value="是">是</option>
+        <option value="否">否</option>
+      </select>
+      <small *ngIf="questionnaireForm.get('smoking')?.hasError('required') && questionnaireForm.get('smoking')?.touched"
+             class="error-text">請選擇一個選項</small>
+    </div>
+
+    <!-- ✅ 按鈕永遠可點，交由 onSubmit() 判斷 -->
+    <button type="submit" class="submit-btn">送出表單</button>
+  </form>
+
+  <!-- 歷史紀錄 -->
+  <div class="results-section">
+    <h3>📊 歷史填寫結果</h3>
+    <div *ngIf="results.length === 0">尚無紀錄</div>
+
+    <div *ngFor="let r of results; let i = index" class="result-card">
+      <p><strong>填寫時間：</strong>{{ r.timestamp | date:'yyyy/MM/dd HH:mm' }}</p>
+      <p><strong>姓名：</strong>{{ r.name }}</p>
+      <p><strong>年齡：</strong>{{ r.age }}</p>
+      <p><strong>Email：</strong>{{ r.email }}</p>
+      <p><strong>運動：</strong>{{ r.exercise }}</p>
+      <p><strong>手搖頻率：</strong>{{ r.sugarDrink }}</p>
+      <p><strong>是否抽菸：</strong>{{ r.smoking }}</p>
+      <button class="remove-btn" (click)="deleteResult(i)">刪除此筆</button>
+    </div>
+
+    <button class="clear-btn" (click)="clearAll()" *ngIf="results.length > 0">🗑 清除全部紀錄</button>
+  </div>
+</div>
